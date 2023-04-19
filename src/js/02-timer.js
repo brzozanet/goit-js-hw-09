@@ -48,11 +48,12 @@ function convertMs(ms) {
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
   return { days, hours, minutes, seconds };
-}
+};
 
-console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
-console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
-console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
+function addLeadingZero(value) {
+  if (value < 10) return value.toString().padStart(2, '0');
+  return value;
+};
 
 function startTimer() {
   timerRefresh = setInterval(() => {
@@ -65,10 +66,10 @@ function startTimer() {
     console.log(deltaTime);
     const time = convertMs(deltaTime);
     console.log(time);
-    daysValueEl.textContent = `${time.days}`;
-    hoursValueEl.textContent = `${time.hours}`;
-    minutesValueEl.textContent = `${time.minutes}`;
-    secondsValueEl.textContent = `${time.seconds}`;
+    daysValueEl.textContent = `${addLeadingZero(time.days)}`;
+    hoursValueEl.textContent = `${addLeadingZero(time.hours)}`;
+    minutesValueEl.textContent = `${addLeadingZero(time.minutes)}`;
+    secondsValueEl.textContent = `${addLeadingZero(time.seconds)}`;
   }, 1000);
 };
 
